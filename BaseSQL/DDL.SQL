@@ -6,63 +6,68 @@ SET AUTOCOMMIT = 0;
 
 -- Create Libraries table
 CREATE OR REPLACE TABLE Libraries (
-    libraryID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    libraryID INT NOT NULL AUTO_INCREMENT,
     libraryName VARCHAR(50) NOT NULL,
     libraryAddress VARCHAR(50) NOT NULL,
-    contactNumber INT NOT NULL
+    contactNumber INT NOT NULL,
+    PRIMARY KEY (libraryID)
 );
 
 -- Create Books table
 CREATE OR REPLACE TABLE Books (
-    bookID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    bookISBN VARCHAR(20) NOT NULL,
+    bookID INT NOT NULL AUTO_INCREMENT,
+    bookISBN INT NOT NULL,
     bookTitle VARCHAR(50) NOT NULL,
     bookAuthor VARCHAR(50) NOT NULL,
     bookGenre VARCHAR(50) NOT NULL,
-    Libraries_libraryID INT NOT NULL,
-    CONSTRAINT fk_books_library FOREIGN KEY (Libraries_libraryID) REFERENCES Libraries(libraryID)
+    librariesLibraryID INT NOT NULL,
+    PRIMARY KEY (bookID),
+    CONSTRAINT fkBooksLibrary FOREIGN KEY (librariesLibraryID) REFERENCES Libraries(libraryID) ON DELETE CASCADE
 );
 
 -- Create Borrowers table
 CREATE OR REPLACE TABLE Borrowers (
-    userID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL AUTO_INCREMENT,
     userName VARCHAR(50) NOT NULL,
     userAddress VARCHAR(50) NOT NULL,
-    userPhone INT NOT NULL
+    userPhone INT NOT NULL,
+    PRIMARY KEY (userID)
 );
 
 -- Create Staff table
 CREATE OR REPLACE TABLE Staff (
-    staffID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    staffID INT NOT NULL AUTO_INCREMENT,
     staffName VARCHAR(50) NOT NULL,
     staffTitle VARCHAR(50) NOT NULL,
     staffExtension INT,
-    Libraries_libraryID INT NOT NULL,
-    CONSTRAINT fk_staff_library FOREIGN KEY (Libraries_libraryID) REFERENCES Libraries(libraryID)
+    librariesLibraryID INT NOT NULL,
+    PRIMARY KEY (staffID),
+    CONSTRAINT fkStaffLibrary FOREIGN KEY (librariesLibraryID) REFERENCES Libraries(libraryID) ON DELETE CASCADE
 );
 
 -- Create Checkouts table
 CREATE OR REPLACE TABLE Checkouts (
-    checkoutID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    checkoutID INT NOT NULL AUTO_INCREMENT,
     dueDate DATE NOT NULL,
     isReturn TINYINT,
-    Libraries_libraryID INT NOT NULL,
-    Books_bookID INT NOT NULL,
-    Borrowers_userID INT NOT NULL,
-    Staff_staffID INT NOT NULL,
-    CONSTRAINT fk_checkouts_library FOREIGN KEY (Libraries_libraryID) REFERENCES Libraries(libraryID),
-    CONSTRAINT fk_checkouts_book FOREIGN KEY (Books_bookID) REFERENCES Books(bookID),
-    CONSTRAINT fk_checkouts_borrower FOREIGN KEY (Borrowers_userID) REFERENCES Borrowers(userID) ON DELETE CASCADE,
-    CONSTRAINT fk_checkouts_staff FOREIGN KEY (Staff_staffID) REFERENCES Staff(staffID) ON DELETE SET NULL
+    librariesLibraryID INT NOT NULL,
+    booksBookID INT NOT NULL,
+    borrowersUserID INT NOT NULL,
+    staffStaffID INT NOT NULL,
+    PRIMARY KEY (checkoutID),
+    CONSTRAINT fkCheckoutsLibrary FOREIGN KEY (librariesLibraryID) REFERENCES Libraries(libraryID) ON DELETE CASCADE,
+    CONSTRAINT fkCheckoutsBook FOREIGN KEY (booksBookID) REFERENCES Books(bookID) ON DELETE RESTRICT,
+    CONSTRAINT fkCheckoutsBorrower FOREIGN KEY (borrowersUserID) REFERENCES Borrowers(userID) ON DELETE CASCADE,
+    CONSTRAINT fkCheckoutsStaff FOREIGN KEY (staffStaffID) REFERENCES Staff(staffID) ON DELETE RESTRICT
 );
 
--- Create Books_has_Borrowers table
-CREATE OR REPLACE TABLE Books_has_Borrowers (
-    Books_bookID INT NOT NULL,
-    Borrowers_userID INT NOT NULL,
-    PRIMARY KEY (Books_bookID, Borrowers_userID),
-    CONSTRAINT fk_books_has_borrowers_book FOREIGN KEY (Books_bookID) REFERENCES Books(bookID),
-    CONSTRAINT fk_books_has_borrowers_borrower FOREIGN KEY (Borrowers_userID) REFERENCES Borrowers(userID) ON DELETE CASCADE
+-- Create BooksBorrowers table
+CREATE OR REPLACE TABLE BooksBorrowers (
+    booksBookID INT NOT NULL,
+    borrowersUserID INT NOT NULL,
+    PRIMARY KEY (booksBookID, borrowersUserID),
+    CONSTRAINT fkBooksHasBorrowersBook FOREIGN KEY (booksBookID) REFERENCES Books(bookID) ON DELETE CASCADE,
+    CONSTRAINT fkBooksHasBorrowersBorrower FOREIGN KEY (borrowersUserID) REFERENCES Borrowers(userID) ON DELETE CASCADE
 );
 
 -- Insert data into Libraries table
@@ -74,7 +79,7 @@ VALUES
 ('Harrington', '236 Blackwater Blvd, Sunnyside, OR, 93432', 5032349944);
 
 -- Insert data into Books table
-INSERT INTO Books (bookISBN, bookTitle, bookAuthor, bookGenre, Libraries_libraryID) 
+INSERT INTO Books (bookISBN, bookTitle, bookAuthor, bookGenre, librariesLibraryID) 
 VALUES
 (1593276036, 'Python Crash Course', 'Eric Matthes', 'Nonfiction', 2),
 (593498089, 'Solito: a memoir', 'Javier Zamora', 'Biography', 1),
@@ -90,7 +95,7 @@ VALUES
 ('Edward Halle', '44 Ferry St, Sunnyside, OR, 93432', 5035769941);
 
 -- Insert data into Staff table
-INSERT INTO Staff (staffName, staffTitle, staffExtension, Libraries_libraryID) 
+INSERT INTO Staff (staffName, staffTitle, staffExtension, librariesLibraryID) 
 VALUES
 ('Amy Lane', 'Library Manager', 121, 3),
 ('Adam Ghuyen', 'Reference Librarian', NULL, 2),
@@ -98,19 +103,19 @@ VALUES
 ('Synthia Hart', 'Children Librarian', 124, 4);
 
 -- Insert data into Checkouts table
-INSERT INTO Checkouts (dueDate, isReturn, Libraries_libraryID, Books_bookID, Borrowers_userID, Staff_staffID) 
+INSERT INTO Checkouts (dueDate, isReturn, librariesLibraryID, booksBookID, borrowersUserID, staffStaffID) 
 VALUES
 ('2024-10-28', 0, 1, 1, 1, 1),
 ('2024-11-01', 0, 2, 2, 2, 2),
 ('2024-11-05', 1, 3, 3, 3, 3),
 ('2024-11-10', 0, 4, 4, 4, 4);
 
--- Insert data into Books_has_Borrowers table
+-- Insert data into BooksBorrowers table
 -- (1, 1): Book with bookID 1 is borrowed by borrower with userID 1
 -- (1, 2): Book with bookID 1 is also borrowed by borrower with userID 2
 -- (2, 3): Book with bookID 2 is borrowed by borrower with userID 3
 -- (3, 4): Book with bookID 3 is borrowed by borrower with userID 4
-INSERT INTO Books_has_Borrowers (Books_bookID, Borrowers_userID) 
+INSERT INTO BooksBorrowers (booksBookID, borrowersUserID) 
 VALUES
 (1, 1),
 (1, 2),
