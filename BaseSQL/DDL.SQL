@@ -83,8 +83,8 @@ INSERT INTO Books (bookISBN, bookTitle, bookAuthor, bookGenre, librariesLibraryI
 VALUES
 (1593276036, 'Python Crash Course', 'Eric Matthes', 'Nonfiction', 2),
 (593498089, 'Solito: a memoir', 'Javier Zamora', 'Biography', 1),
-('5933650X', 'The Seven Year Slip', 'Ashley Poston', 'Fiction', 1),
-('62364355X', 'A Mind Awake', 'C.S. Lewis', 'Nonfiction', 4);
+('05933650X', 'The Seven Year Slip', 'Ashley Poston', 'Fiction', 1),
+('0062364355X', 'A Mind Awake', 'C.S. Lewis', 'Nonfiction', 4);
 
 -- Insert data into Borrowers table
 INSERT INTO Borrowers (userName, userAddress, userPhone) 
