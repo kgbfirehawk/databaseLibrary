@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>Libraries</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<h1>Libraries</h1>
+
+[ <a href="index.html">Home</a> | <a href="libraries.html">Libraries</a> | <a href="staff.html">Staff</a> | <a href="books.html">Books</a> | <a href="borrowers.html">Borrowers</a> | <a href="checkouts.html">Checkouts</a>]
+<div id="browse" style="display: block">
+<p><strong>Browse Libraries</strong></p>
+
+<button type="button">Add New</button>
+
+<table border="1" cellpadding="5">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Contact</th>
+  </tr>
+  <tr>
+    <td align="right" >1</td>
+    <td>Mansfield</td>
+    <td>123 E. Broadway St, Sunnyside, OR, 93643</td>
+    <td>503-234-9999</td>
+  </tr>
+  <tr>
+    <td align="right" >2</td>
+    <td>Bluehill</td>
+    <td>560 Wyatt Ave, Sunnyside, OR, 94645</td>
+    <td>503-234-9923</td>
+  </tr>
+  <tr>
+    <td align="right" >3</td>
+    <td>Lovewood</td>
+    <td>62 S. Govern St., Sunnyside, OR, 94222</td>
+    <td>503-234-9976</td>
+  </tr>
+  <tr>
+    <td align="right" >4</td>
+    <td>Harrington</td>
+    <td>236 Blackwater Blvd, Sunnyside, OR, 93432</td>
+    <td>503-234-9944</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</div> <!-- browse -->
+<div id="insert" style="display: block">
+    <form id="addLibrary">
+        <legend><strong>Add Library</strong></legend>
+          <fieldset class="fields">
+            <label> Name </label> <input type="text" name="name">
+            <label> Population </label> <input type="text" name="address">
+            <label> Language </label> <input type="text" name="contact">
+          </fieldset>
+          <input class="btn" type="submit" id="addPlanet" value="Add a Library">
+          <input class="btn" type="button" value="cancel">
+	</form> <!--add new library-->
+</div><!-- insert -->
+
+</body>
+</html>

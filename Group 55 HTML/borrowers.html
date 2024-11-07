@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>Borrowers</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<h1>Borrowers</h1>
+
+[ <a href="index.html">Home</a> | <a href="libraries.html">Libraries</a> | <a href="staff.html">Staff</a> | <a href="books.html">Books</a> | <a href="borrowers.html">Borrowers</a> | <a href="checkouts.html">Checkouts</a>]
+<div id="browse" style="display: block">
+<p><strong>Browse Borrowers</strong></p>
+
+<button type="button">Add New</button>
+
+<table border="1" cellpadding="5">
+  <tr>
+    <th>User ID</th>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Contact</th>
+  </tr>
+  <tr>
+    <td align="right" >1</td>
+    <td>Mary Johnson</td>
+    <td>232 Westgate Ave, Sunnyside, OR, 95645</td>
+    <td>503-244-5699</td>
+  </tr>
+  <tr>
+    <td align="right" >2</td>
+    <td>James Bason</td>
+    <td>1212 Apple Way, Sunnyside, OR, 94645</td>
+    <td>503-454-2323</td>
+  </tr>
+  <tr>
+    <td align="right" >3</td>
+    <td>Laury Hans</td>
+    <td>45 Maury Lane, Sunnyside, OR, 94223</td>
+    <td>503-234-4343</td>
+  </tr>
+  <tr>
+    <td align="right" >4</td>
+    <td>Edward Halle</td>
+    <td>44 Ferry St., Sunnyside, OR, 93432</td>
+    <td>503-576-9941</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</div> <!-- browse -->
+<div id="insert" style="display: block">
+    <form id="addBorrower">
+        <legend><strong>Add Borrower</strong></legend>
+          <fieldset class="fields">
+            <label> Name </label> <input type="text" name="name">
+            <label> Address </label> <input type="text" name="address">
+            <label> Contact </label> <input type="text" name="contact">
+          </fieldset>
+          <input class="btn" type="submit" id="addBook" value="Add Borrower">
+          <input class="btn" type="button" value="cancel">
+	</form> <!--add new borrower-->
+</div><!-- insert -->
+
+</body>
+</html>

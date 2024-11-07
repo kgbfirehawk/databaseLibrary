@@ -1,0 +1,95 @@
+<html>
+<head>
+<title>Checkouts</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<h1>Checkouts</h1>
+
+[ <a href="index.html">Home</a> | <a href="libraries.html">Libraries</a> | <a href="staff.html">Staff</a> | <a href="books.html">Books</a> | <a href="borrowers.html">Borrowers</a> | <a href="checkouts.html">Checkouts</a>]
+<div id="browse" style="display: block">
+<p><strong>Browse Checkouts</strong></p>
+
+<button type="button">Add New</button>
+
+<table border="1" cellpadding="5">
+  <tr>
+    <th>Checkout ID</th>
+    <th>library ID</th>
+    <th>User ID</th>
+    <th>Staff ID</th>
+    <th>Book ID</th>
+    <th>Due Date</th>
+  </tr>
+  <tr>
+    <td align="right" >1</td>
+    <td align="right" >1</td>
+    <td align="right" >2</td>
+    <td align="right" >3</td>
+    <td align="right" >2</td>
+    <td>11/10/2024</td>
+    <td><a href="#">Return</a></td>
+  </tr>
+  <tr>
+    <td align="right" >2</td>
+    <td align="right" >1</td>
+    <td align="right" >2</td>
+    <td align="right" >3</td>
+    <td align="right" >3</td>
+    <td>11/10/2024</td>
+    <td><a href="#">Return</a></td>
+  </tr>
+  <tr>
+    <td align="right" >3</td>
+    <td align="right" >3</td>
+    <td align="right" >3</td>
+    <td align="right" >1</td>
+    <td align="right" >4</td>
+    <td>11/21/2024</td>
+    <td><a href="#">Return</a></td>
+  </tr>
+  <tr>
+    <td align="right" >4</td>
+    <td align="right" >2</td>
+    <td align="right" >1</td>
+    <td align="right" >2</td>
+    <td align="right" >1</td>
+    <td>11/18/2024</td>
+    <td><a href="#">Return</a></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</div> <!-- browse -->
+<div id="insert" style="display: block">
+    <form id="addCheckout">
+        <legend><strong>Add Checkout</strong></legend>
+          <fieldset class="fields">
+            <label> Library ID </label> <input type="text" name="libraryID">
+            <label> Borrower ID </label> <input type="text" name="borrowerID">
+            <label> Staff ID </label> <input type="text" name="staffID">
+            <label> Book ID </label> <input type="text" name="bookID">
+            <label> Due Date</label> <input type="text" name="dueDate">
+          </fieldset>
+          <input class="btn" type="submit" id="addCheckout" value="Add Checkout">
+          <input class="btn" type="button" value="cancel">
+	</form> <!--add new checkout-->
+</div><!-- insert -->
+
+<p>&nbsp;</p>
+<div id="delete" style="display: block">
+  <form id="deleteCheckout">
+      <legend><strong>Return Book</strong></legend>
+          <fieldset class="fields">
+          <p>Are you sure you wish to return book?</p>
+          <label>Checkout ID:</label> 1
+            <label> Book ID </label> 2
+            
+    </fieldset>
+    <input class="btn" type="submit" id="DeleteStaff" value="Delete Emploee">
+          <input class="btn" type="button" value="cancel" >
+  </form> 
+</div><!-- returns book by deleting -->
+
+</body>
+</html>
