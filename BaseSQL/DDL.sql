@@ -1,4 +1,8 @@
 -- Introduction Data Definition queries
+-- By:  Mackenzie Jackson
+--      Kyle Belina
+
+
 
 -- Disable foreign key checks to avoid issues during import
 SET FOREIGN_KEY_CHECKS=0;
