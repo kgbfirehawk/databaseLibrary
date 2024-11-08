@@ -13,7 +13,7 @@ CREATE OR REPLACE TABLE Libraries (
     PRIMARY KEY (libraryID)
 );
 
--- Create Books table
+-- Create Books table ************************
 CREATE OR REPLACE TABLE Books (
     bookID INT NOT NULL AUTO_INCREMENT,
     -- bookISBN VARCHAR(50) NOT NULL,
@@ -45,11 +45,11 @@ CREATE OR REPLACE TABLE Staff (
     CONSTRAINT fkStaffLibrary FOREIGN KEY (librariesLibraryID) REFERENCES Libraries(libraryID) ON DELETE CASCADE
 );
 
--- Create Checkouts table
+-- Create Checkouts table *********************
 CREATE OR REPLACE TABLE Checkouts (
     checkoutID INT NOT NULL AUTO_INCREMENT,
     dueDate DATE NOT NULL,
-    isReturn TINYINT,
+    -- isReturn TINYINT,
     librariesLibraryID INT NOT NULL,
     booksBookID INT NOT NULL,
     borrowersUserID INT NOT NULL,
@@ -78,7 +78,7 @@ VALUES
 ('Lovewood', '62 S. Goven St, Sunnyside, OR, 94222', '503-234-9876'),
 ('Harrington', '236 Blackwater Blvd, Sunnyside, OR, 93432', '503-234-9944');
 
--- Insert data into Books table
+-- Insert data into Books table (Remove Book ISBN and values????) ******************************
 INSERT INTO Books (bookISBN, bookTitle, bookAuthor, bookGenre, librariesLibraryID) 
 VALUES
 ('1593276036', 'Python Crash Course', 'Eric Matthes', 'Nonfiction', 2),
@@ -102,7 +102,7 @@ VALUES
 ('Brenda Cordelle', 'Book Buyer', 120, 2),
 ('Synthia Hart', 'Children Librarian', 124, 4);
 
--- Insert data into Checkouts table
+-- Insert data into Checkouts table (Remove isReturn and values??????) *********************
 INSERT INTO Checkouts (dueDate, isReturn, librariesLibraryID, booksBookID, borrowersUserID, staffStaffID) 
 VALUES
 ('2024-10-28', 0, 1, 1, 1, 1),
