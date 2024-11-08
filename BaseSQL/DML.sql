@@ -10,18 +10,18 @@ SELECT Books.bookID, bookTitle, bookAuthor, bookGenre, Libraries.libraryName AS 
 FROM Books
 INNER JOIN Libraries ON Books.librariesLibraryID = Libraries.libraryID;
 
--- Get a single book's data for the Update Book form ************remove ISBN?
-SELECT bookID, bookISBN, bookTitle, bookAuthor, bookGenre, librariesLibraryID
+-- Get a single book's data for the Update Book form 
+SELECT bookID, bookTitle, bookAuthor, bookGenre, librariesLibraryID
 FROM Books
 WHERE bookID = :bookID_selected_from_browse_books_page;
 
--- Insert a new book into the Books table ************remove ISBN?
-INSERT INTO Books (bookISBN, bookTitle, bookAuthor, bookGenre, librariesLibraryID)
-VALUES (:bookISBNInput, :bookTitleInput, :bookAuthorInput, :bookGenreInput, :libraryIDInput);
+-- Insert a new book into the Books table 
+INSERT INTO Books (bookTitle, bookAuthor, bookGenre, librariesLibraryID)
+VALUES (:bookTitleInput, :bookAuthorInput, :bookGenreInput, :libraryIDInput);
 
--- Update book details based on submission of the Update Book form ************remove ISBN?
+-- Update book details based on submission of the Update Book form 
 UPDATE Books
-SET bookISBN = :bookISBNInput, bookTitle = :bookTitleInput, bookAuthor = :bookAuthorInput,
+SET bookTitle = :bookTitleInput, bookAuthor = :bookAuthorInput,
     bookGenre = :bookGenreInput, librariesLibraryID = :libraryIDInput
 WHERE bookID = :bookID_from_update_form;
 
@@ -61,21 +61,21 @@ WHERE staffID = :staffID_from_update_form;
 -- Delete a staff member from the Staff table
 DELETE FROM Staff WHERE staffID = :staffID_selected_from_browse_staff_page;
 
--- Get all checkouts with book, borrower, staff, and library details for the List Checkouts page  ********* Remove isReturn?
-SELECT Checkouts.checkoutID, Libraries.libraryName, Borrowers.userName, Staff.staffName, Books.bookTitle, dueDate, isReturn
+-- Get all checkouts with book, borrower, staff, and library details for the List Checkouts page
+SELECT Checkouts.checkoutID, Libraries.libraryName, Borrowers.userName, Staff.staffName, Books.bookTitle, dueDate
 FROM Checkouts
 INNER JOIN Libraries ON Checkouts.librariesLibraryID = Libraries.libraryID
 INNER JOIN Borrowers ON Checkouts.borrowersUserID = Borrowers.userID
 INNER JOIN Staff ON Checkouts.staffStaffID = Staff.staffID
 INNER JOIN Books ON Checkouts.booksBookID = Books.bookID;
 
--- Insert a new checkout into the Checkouts table ********* Remove isReturn?
-INSERT INTO Checkouts (dueDate, isReturn, librariesLibraryID, booksBookID, borrowersUserID, staffStaffID)
-VALUES (:dueDateInput, :isReturnInput, :libraryIDInput, :bookIDInput, :borrowerIDInput, :staffIDInput);
+-- Insert a new checkout into the Checkouts table
+INSERT INTO Checkouts (dueDate, librariesLibraryID, booksBookID, borrowersUserID, staffStaffID)
+VALUES (:dueDateInput, :libraryIDInput, :bookIDInput, :borrowerIDInput, :staffIDInput);
 
--- Update checkout details based on submission of the Update Checkout form  ********* Remove isReturn?
+-- Update checkout details based on submission of the Update Checkout form
 UPDATE Checkouts
-SET dueDate = :dueDateInput, isReturn = :isReturnInput, librariesLibraryID = :libraryIDInput,
+SET dueDate = :dueDateInput, librariesLibraryID = :libraryIDInput,
     booksBookID = :bookIDInput, borrowersUserID = :borrowerIDInput, staffStaffID = :staffIDInput
 WHERE checkoutID = :checkoutID_from_update_form;
 

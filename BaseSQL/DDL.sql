@@ -17,10 +17,9 @@ CREATE OR REPLACE TABLE Libraries (
     PRIMARY KEY (libraryID)
 );
 
--- Create Books table ************************
+-- Create Books table 
 CREATE OR REPLACE TABLE Books (
     bookID INT NOT NULL AUTO_INCREMENT,
-    -- bookISBN VARCHAR(50) NOT NULL,
     bookTitle VARCHAR(50) NOT NULL,
     bookAuthor VARCHAR(50) NOT NULL,
     bookGenre VARCHAR(50) NOT NULL,
@@ -49,11 +48,10 @@ CREATE OR REPLACE TABLE Staff (
     CONSTRAINT fkStaffLibrary FOREIGN KEY (librariesLibraryID) REFERENCES Libraries(libraryID) ON DELETE CASCADE
 );
 
--- Create Checkouts table *********************
+-- Create Checkouts table 
 CREATE OR REPLACE TABLE Checkouts (
     checkoutID INT NOT NULL AUTO_INCREMENT,
     dueDate DATE NOT NULL,
-    -- isReturn TINYINT,
     librariesLibraryID INT NOT NULL,
     booksBookID INT NOT NULL,
     borrowersUserID INT NOT NULL,
@@ -82,13 +80,13 @@ VALUES
 ('Lovewood', '62 S. Goven St, Sunnyside, OR, 94222', '503-234-9876'),
 ('Harrington', '236 Blackwater Blvd, Sunnyside, OR, 93432', '503-234-9944');
 
--- Insert data into Books table (Remove Book ISBN and values????) ******************************
-INSERT INTO Books (bookISBN, bookTitle, bookAuthor, bookGenre, librariesLibraryID) 
+-- Insert data into Books table 
+INSERT INTO Books (bookTitle, bookAuthor, bookGenre, librariesLibraryID) 
 VALUES
-('1593276036', 'Python Crash Course', 'Eric Matthes', 'Nonfiction', 2),
-('593498089', 'Solito: a memoir', 'Javier Zamora', 'Biography', 1),
-('05933650X', 'The Seven Year Slip', 'Ashley Poston', 'Fiction', 1),
-('0062364355X', 'A Mind Awake', 'C.S. Lewis', 'Nonfiction', 4);
+('Python Crash Course', 'Eric Matthes', 'Nonfiction', 2),
+('Solito: a memoir', 'Javier Zamora', 'Biography', 1),
+('The Seven Year Slip', 'Ashley Poston', 'Fiction', 1),
+('A Mind Awake', 'C.S. Lewis', 'Nonfiction', 4);
 
 -- Insert data into Borrowers table
 INSERT INTO Borrowers (userName, userAddress, userPhone) 
@@ -106,13 +104,13 @@ VALUES
 ('Brenda Cordelle', 'Book Buyer', 120, 2),
 ('Synthia Hart', 'Children Librarian', 124, 4);
 
--- Insert data into Checkouts table (Remove isReturn and values??????) *********************
-INSERT INTO Checkouts (dueDate, isReturn, librariesLibraryID, booksBookID, borrowersUserID, staffStaffID) 
+-- Insert data into Checkouts table
+INSERT INTO Checkouts (dueDate, librariesLibraryID, booksBookID, borrowersUserID, staffStaffID) 
 VALUES
-('2024-10-28', 0, 1, 1, 1, 1),
-('2024-11-01', 0, 2, 2, 2, 2),
-('2024-11-05', 1, 3, 3, 3, 3),
-('2024-11-10', 0, 4, 4, 4, 4);
+('2024-10-28', 1, 1, 1, 1),
+('2024-11-01', 2, 2, 2, 2),
+('2024-11-05', 3, 3, 3, 3),
+('2024-11-10', 4, 4, 4, 4);
 
 -- Insert data into BooksBorrowers table
 -- (1, 1): Book with bookID 1 is borrowed by borrower with userID 1
