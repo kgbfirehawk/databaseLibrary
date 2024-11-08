@@ -1,6 +1,8 @@
 -- Data Manipulation Queries for Library Management System
 -- By:  Mackenzie Jackson
 --      Kyle Belina
+-- colon : character being used to denote the variables that will have data from the backend programming language
+
 
 -- Get all libraries for displaying in dropdowns
 SELECT libraryID, libraryName FROM Libraries;
