@@ -67,7 +67,15 @@
             <label> Name </label> <input type="text" name="name">
             <label> Title </label> <input type="text" name="title">
             <label> Extension </label> <input type="text" name="extension">
-            <label> Library ID </label> <input type="text" name="libraryID">
+            <label> Library ID </label> 
+            <select name="libraryID">
+              <!-- The backend will populate this select element, examples below -->
+              <option value="">Select Library</option>
+              <option value="1">Mansfield</option>
+              <option value="2">Bluehill</option>
+              <option value="3">Lovewood</option>
+              <option value="4">Harrington</option>
+          </select>
           </fieldset>
           <input class="btn" type="submit" id="addStaff" value="Add Employee">
           <input class="btn" type="button" value="cancel">
@@ -81,7 +89,7 @@
           <fieldset class="fields">
           <label>ID:</label> 1
             <label> Name </label> <input type="text" value="Amy Lane" name="name">
-            <label> Population </label> <input type="text"  name="title" value="Library Manager">
+            <label> Title </label> <input type="text"  name="title" value="Library Manager">
             <label> Extension </label> <input type="text" name="extension" value="121">
             <label> Library ID </label> <input type="text" name="libraryID" value="3">
     </fieldset>

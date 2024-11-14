@@ -7,6 +7,10 @@
 -- Get all libraries for displaying in dropdowns
 SELECT libraryID, libraryName FROM Libraries;
 
+-- Insert a new library into the Libraries table
+INSERT INTO Libraries (libraryName, libraryAddress, contactNumber)
+VALUES (:libraryNameInput, :libraryAddressInput, :contactNumberInput);
+
 -- Get all books and their respective library for the List Books page
 SELECT Books.bookID, bookTitle, bookAuthor, bookGenre, Libraries.libraryName AS library
 FROM Books
@@ -48,7 +52,7 @@ DELETE FROM Borrowers WHERE userID = :userID_selected_from_browse_borrowers_page
 -- Get all staff members and their respective library for the List Staff page
 SELECT Staff.staffID, staffName, staffTitle, staffExtension, Libraries.libraryName AS library
 FROM Staff
-INNER JOIN Libraries ON Staff.librariesLibraryID = Libraries.libraryID;
+LEFT JOIN Libraries ON Staff.librariesLibraryID = Libraries.libraryID;
 
 -- Insert a new staff member into the Staff table
 INSERT INTO Staff (staffName, staffTitle, staffExtension, librariesLibraryID)
@@ -83,3 +87,10 @@ WHERE checkoutID = :checkoutID_from_update_form;
 
 -- Delete a checkout from the Checkouts table
 DELETE FROM Checkouts WHERE checkoutID = :checkoutID_selected_from_browse_checkouts_page;
+
+-- Insert a new book-borrower association into the BooksBorrowers table
+INSERT INTO BooksBorrowers (booksBookID, borrowersUserID)
+VALUES (:bookIDInput, :borrowerIDInput);
+
+-- Delete a book-borrower association from the BooksBorrowers table
+DELETE FROM BooksBorrowers WHERE booksBookID = :bookIDInput AND borrowersUserID = :borrowerIDInput;

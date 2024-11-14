@@ -43,9 +43,9 @@ CREATE OR REPLACE TABLE Staff (
     staffName VARCHAR(50) NOT NULL,
     staffTitle VARCHAR(50) NOT NULL,
     staffExtension INT,
-    librariesLibraryID INT NOT NULL,
+    librariesLibraryID INT,
     PRIMARY KEY (staffID),
-    CONSTRAINT fkStaffLibrary FOREIGN KEY (librariesLibraryID) REFERENCES Libraries(libraryID) ON DELETE CASCADE
+    CONSTRAINT fkStaffLibrary FOREIGN KEY (librariesLibraryID) REFERENCES Libraries(libraryID) ON DELETE SET NULL
 );
 
 -- Create Checkouts table 
