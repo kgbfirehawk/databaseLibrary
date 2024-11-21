@@ -61,7 +61,6 @@ CREATE OR REPLACE TABLE Checkouts (
     CONSTRAINT fkCheckoutsBook FOREIGN KEY (booksBookID) REFERENCES Books(bookID) ON DELETE RESTRICT,
     CONSTRAINT fkCheckoutsBorrower FOREIGN KEY (borrowersUserID) REFERENCES Borrowers(userID) ON DELETE CASCADE,
     CONSTRAINT fkCheckoutsStaff FOREIGN KEY (staffStaffID) REFERENCES Staff(staffID) ON DELETE RESTRICT
-    ON DELETE CASCADE
 );
 
 -- Create BooksBorrowers table
