@@ -1,0 +1,70 @@
+<h1>Staff</h1>
+
+<a href="/">Home</a> | <a href="/staff">Staff</a>
+
+<!-- Display all staff -->
+<table border="1">
+    <thead>
+        <tr>
+            <th>Staff ID</th>
+            <th>Name</th>
+            <th>Title</th>
+            <th>Extension</th>
+            <th>Library ID</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.staffID}}</td>
+            <td>{{this.staffName}}</td>
+            <td>{{this.staffTitle}}</td>
+            <td>{{this.staffExtension}}</td>
+            <td>{{this.librariesLibraryID}}</td>
+            <td>
+                <form action="/staff/update/{{this.staffID}}" method="GET" style="display:inline;">
+                    <button type="submit">Edit</button>
+                </form>
+                <form action="/staff/delete/{{this.staffID}}" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<!-- Update staff member details -->
+{{#if editData}}
+<h3>Update Staff Member</h3>
+<form action="/staff/update/{{editData.staffID}}" method="POST">
+    <label>Name: </label><input type="text" name="staffName" value="{{editData.staffName}}"><br>
+    <label>Title: </label><input type="text" name="staffTitle" value="{{editData.staffTitle}}"><br>
+    <label>Extension: </label><input type="text" name="staffExtension" value="{{editData.staffExtension}}"><br>
+    <label>Library ID: </label>
+    <select name="librariesLibraryID">
+    {{#each libraries}}
+        <option value="{{this.libraryID}}" {{#if (eq ../editData.librariesLibraryID this.libraryID)}}selected{{/if}}>
+            {{this.libraryName}}
+        </option>
+    {{/each}}
+    </select><br>
+    <button type="submit">Update Staff</button>
+</form>
+{{else}}
+<!-- Add a new staff member -->
+<h3>Add New Staff Member</h3>
+<form action="/staff/add" method="POST">
+    <label>Name: </label><input type="text" name="staffName"><br>
+    <label>Title: </label><input type="text" name="staffTitle"><br>
+    <label>Extension: </label><input type="text" name="staffExtension"><br>
+    <label>Library ID: </label>
+    <select name="librariesLibraryID">
+        {{#each libraries}}
+            <option value="{{this.libraryID}}">{{this.libraryName}}</option>
+        {{/each}}
+    </select><br>
+    <button type="submit">Add Staff</button>
+</form>
+{{/if}}
