@@ -1,10 +1,12 @@
-// app.js
- /* Citation for the following function:
+/*
+{{!-- Citation for the following function:
 Date: 11/21/2024
-Adapted from CS 340: nodejs-starter-app (app.js)
+Adapted from CS 340: nodejs-starter-app (index.hbs)
 Majority of the code was copied from the sample code given, and modified based on individual project tables. 
-Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%200%20-%20Setting%20Up%20Node.js
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%200%20-%20Setting%20Up%20Node.js --}} 
 */
+// app.js
+
 
 /*
     SETUP
@@ -29,11 +31,12 @@ hbs.registerHelper('eq', function(a, b) {
 
 app.use(express.urlencoded({ extended: true })); 
 app.use(express.json()); 
-app.use(express.static('public'));
 
 /*
     ROUTES
 */
+
+// routes for 'Staff'
 const staffRoutes = require('./routes/staffRoutes');  // Import staff routes
 app.use('/', staffRoutes);  // Use staff routes
 
@@ -48,6 +51,35 @@ app.get('/', function(req, res)
                                                                 // an object where 'data' is equal to the 'rows' we
     });                                                         // received back from the query
 
+//routes for 'Books'
+const booksRoutes = require('./routes/booksRoutes');  // Import books routes
+app.use('/', booksRoutes);  // Use books routes
+
+app.get('/', function(req, res)
+    {  
+        let query2 = "SELECT * FROM Books;";               // Define our query
+
+        db.pool.query(query2, function(error, rows, fields){    // Execute the query
+
+           res.render('index', {data: rows});                  // Render the index.hbs file, and also send the renderer
+        }) 
+                                                                // an object where 'data' is equal to the 'rows' we
+    });   
+
+//routes for 'Borrowers'
+const borrowersRoutes = require('./routes/borrowersRoutes');  // Import borrowers routes
+app.use('/', borrowersRoutes);  // Use borrowers routes
+
+app.get('/', function(req, res)
+    {  
+        let query3 = "SELECT * FROM Borrowers;";               // Define our query
+
+        db.pool.query(query3, function(error, rows, fields){    // Execute the query
+
+           res.render('index', {data: rows});                  // Render the index.hbs file, and also send the renderer
+        }) 
+                                                                // an object where 'data' is equal to the 'rows' we
+    }); 
  /*
     LISTENER
 */
