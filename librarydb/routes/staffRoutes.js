@@ -26,7 +26,11 @@ function queryDatabase(query, inserts = []) {
 // GET route for the main /staff page
 router.get('/staff', async function(req, res) {
     try {
-        let queryStaff = "SELECT * FROM Staff;";
+        let queryStaff = `
+            SELECT Staff.staffID, Staff.staffName, Staff.staffTitle, Staff.staffExtension, Libraries.libraryName, Staff.librariesLibraryID
+            FROM Staff 
+            LEFT JOIN Libraries ON Staff.librariesLibraryID = Libraries.libraryID;
+        `;
         let queryLibraries = "SELECT * FROM Libraries;";
 
         const [staffRows, libraryRows] = await Promise.all([

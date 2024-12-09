@@ -15,6 +15,8 @@ Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/St
 var express = require('express');   // We are using the express library for the web server
 var app     = express();            // We need to instantiate an express object to interact with the server in our code
 PORT        = 8728;                 // Set a port number at the top so it's easy to change in the future
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Database
 var db = require('./database/db-connector')
@@ -31,7 +33,7 @@ hbs.registerHelper('eq', function(a, b) {
 
 app.use(express.urlencoded({ extended: true })); 
 app.use(express.json()); 
-
+app.use(express.static(path.join(__dirname, 'public')));
 /*
     ROUTES
 */

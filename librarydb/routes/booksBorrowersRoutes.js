@@ -9,85 +9,98 @@ const express = require('express');
 const router = express.Router();
 const db = require('../database/db-connector');
 
-// Helper function to execute a query and return a promise
-function queryDatabase(query, inserts = []) {
-    return new Promise((resolve, reject) => {
-        db.pool.query(query, inserts, (error, results) => {
-            if (error) {
-                reject(error);
-            } else {
-                resolve(results);
-            }
-        });
-    });
-}
-
 // GET route for the booksBorrowers page
-router.get('/booksBorrowers', async function(req, res) {
-    try {
-        // Query to get all book-borrower relationships with names
-        let queryBooksBorrowers = `
-            SELECT 
-                BooksBorrowers.booksBookID,
-                BooksBorrowers.borrowersUserID,
-                Books.bookTitle,
-                Borrowers.userName
-            FROM BooksBorrowers
-            JOIN Books ON BooksBorrowers.booksBookID = Books.bookID
-            JOIN Borrowers ON BooksBorrowers.borrowersUserID = Borrowers.userID;
-        `;
+router.get('/booksBorrowers', function(req, res) {
+    let queryBooksBorrowers = `
+        SELECT Books.bookID AS booksBookID, Books.bookTitle, Borrowers.userID AS borrowersUserID, Borrowers.userName
+        FROM BooksBorrowers
+        JOIN Books ON BooksBorrowers.booksBookID = Books.bookID
+        JOIN Borrowers ON BooksBorrowers.borrowersUserID = Borrowers.userID;
+    `;
+    let queryBooks = "SELECT * FROM Books;";
+    let queryBorrowers = "SELECT * FROM Borrowers;";
 
-        // Queries to get all books and borrowers for the dropdowns
-        let queryBooks = "SELECT bookID, bookTitle FROM Books;";
-        let queryBorrowers = "SELECT userID, userName FROM Borrowers;";
-
-        const [booksBorrowersRows, booksRows, borrowersRows] = await Promise.all([
-            queryDatabase(queryBooksBorrowers),
-            queryDatabase(queryBooks),
-            queryDatabase(queryBorrowers)
-        ]);
-
-        res.render('booksBorrowers', {
-            data: booksBorrowersRows,
-            books: booksRows,
-            borrowers: borrowersRows
-        });
-    } catch (error) {
-        console.error(error);
-        res.sendStatus(500);
-    }
+    db.pool.query(queryBooksBorrowers, function(error, booksBorrowersRows, fields) {
+        if (error) {
+            console.error(error);
+            res.sendStatus(500);
+        } else {
+            db.pool.query(queryBooks, function(bookError, bookRows, fields) {
+                if (bookError) {
+                    console.error(bookError);
+                    res.sendStatus(500);
+                } else {
+                    db.pool.query(queryBorrowers, function(borrowerError, borrowerRows, fields) {
+                        if (borrowerError) {
+                            console.error(borrowerError);
+                            res.sendStatus(500);
+                        } else {
+                            res.render('booksBorrowers', {
+                                data: booksBorrowersRows,
+                                books: bookRows,
+                                borrowers: borrowerRows
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
 });
 
 // POST route for adding a new book-borrower relationship
-router.post('/booksBorrowers/add', async function(req, res) {
+router.post('/booksBorrowers/add', function(req, res) {
     let data = req.body;
 
     let query = `INSERT INTO BooksBorrowers (booksBookID, borrowersUserID) VALUES (?, ?)`;
     let inserts = [data.bookID, data.borrowerID];
 
-    try {
-        await queryDatabase(query, inserts);
-        res.redirect('/booksBorrowers');
-    } catch (error) {
-        console.error(error);
-        res.sendStatus(500);
-    }
+    db.pool.query(query, inserts, function(error, rows, fields) {
+        if (error) {
+            console.error(error);
+            res.sendStatus(500);
+        } else {
+            res.redirect('/booksBorrowers');
+        }
+    });
+});
+
+// POST route for updating a book-borrower relationship
+router.post('/booksBorrowers/update', function(req, res) {
+    let data = req.body;
+
+    let query = `
+        UPDATE BooksBorrowers 
+        SET booksBookID = ?, borrowersUserID = ?
+        WHERE booksBookID = ? AND borrowersUserID = ?
+    `;
+    let inserts = [data.bookID, data.borrowerID, data.originalBookID, data.originalBorrowerID];
+
+    db.pool.query(query, inserts, function(error, rows, fields) {
+        if (error) {
+            console.error(error);
+            res.sendStatus(500);
+        } else {
+            res.redirect('/booksBorrowers');
+        }
+    });
 });
 
 // POST route for deleting a book-borrower relationship
-router.post('/booksBorrowers/delete', async function(req, res) {
+router.post('/booksBorrowers/delete', function(req, res) {
     let data = req.body;
 
     let query = `DELETE FROM BooksBorrowers WHERE booksBookID = ? AND borrowersUserID = ?`;
     let inserts = [data.bookID, data.borrowerID];
 
-    try {
-        await queryDatabase(query, inserts);
-        res.redirect('/booksBorrowers');
-    } catch (error) {
-        console.error(error);
-        res.sendStatus(500);
-    }
+    db.pool.query(query, inserts, function(error, rows, fields) {
+        if (error) {
+            console.error(error);
+            res.sendStatus(500);
+        } else {
+            res.redirect('/booksBorrowers');
+        }
+    });
 });
 
 module.exports = router;

@@ -7,6 +7,7 @@ Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/St
 
 <h1>Staff</h1>
 
+<link rel="stylesheet" href="/styles.css">
 <div class="topnav" id="librariesTopnav">
   <a href="/"><button type="button">Home</button></a>
   <a href="/libraries"><button type="button">Libraries</button></a>
@@ -26,7 +27,7 @@ Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/St
             <th>Name</th>
             <th>Title</th>
             <th>Extension</th>
-            <th>Library ID</th>
+            <th>Library Name</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -37,7 +38,7 @@ Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/St
             <td>{{this.staffName}}</td>
             <td>{{this.staffTitle}}</td>
             <td>{{this.staffExtension}}</td>
-            <td>{{this.librariesLibraryID}}</td>
+            <td>{{this.libraryName}}</td>
             <td>
                 <button type="button" onclick="populateForm(
                     '{{this.staffID}}',
@@ -79,7 +80,7 @@ function populateForm(staffID, staffName, staffTitle, staffExtension, librariesL
     document.getElementById('staffName').value = staffName;
     document.getElementById('staffTitle').value = staffTitle;
     document.getElementById('staffExtension').value = staffExtension;
-    document.getElementById('librariesLibraryID').value = librariesLibraryID;
+    document.getElementById('librariesLibraryID').value = librariesLibraryID || '';
     document.getElementById('formTitle').innerText = 'Update Staff Member';
     document.getElementById('formButton').innerText = 'Update Staff Member';
     document.getElementById('staffForm').action = '/staff/update/' + staffID;

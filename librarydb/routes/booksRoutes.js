@@ -11,15 +11,18 @@ const db = require('../database/db-connector');
 
 // GET route for the books page
 router.get('/books', function(req, res) {
-    let queryBooks = "SELECT * FROM Books;";  // SQL query to get all staff members
-    let queryLibraries = "SELECT * FROM Libraries;";  // SQL query to get all libraries
+    let queryBooks = `SELECT Books.bookID, Books.bookTitle, Books.bookAuthor, Books.bookGenre, Libraries.libraryName 
+                  FROM Books 
+                  JOIN Libraries ON Books.librariesLibraryID = Libraries.libraryID`;
 
-    db.pool.query(queryBooks, function(error, bookRows, fields) {
-        if (error) {
-            console.error(error);
-            res.sendStatus(500); 
+    let queryLibraries = `SELECT * FROM Libraries`;
+
+    db.pool.query(queryBooks, function(bookError, bookRows, bookFields) {
+        if (bookError) {
+            console.error(bookError);
+            res.sendStatus(500);
         } else {
-            db.pool.query(queryLibraries, function(libError, libraryRows, fields) {
+            db.pool.query(queryLibraries, function(libError, libraryRows, libFields) {
                 if (libError) {
                     console.error(libError);
                     res.sendStatus(500);  

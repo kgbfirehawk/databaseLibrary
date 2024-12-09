@@ -5,7 +5,7 @@ Adapted from CS 340: nodejs-starter-app (index.hbs)
 Majority of the code was copied from the sample code given, and modified based on individual project tables. 
 Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%200%20-%20Setting%20Up%20Node.js --}} 
 <h1>Books</h1>
-
+<link rel="stylesheet" href="/styles.css">
 <div class="topnav" id="librariesTopnav">
   <a href="/"><button type="button">Home</button></a>
   <a href="/libraries"><button type="button">Libraries</button></a>
@@ -25,7 +25,7 @@ Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/St
             <th>Title</th>
             <th>Author</th>
             <th>Genre</th>
-            <th>Library ID</th>
+            <th>Library Name</th>
         </tr>
     </thead>
     <tbody>
@@ -35,7 +35,7 @@ Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/St
             <td>{{this.bookTitle}}</td>
             <td>{{this.bookAuthor}}</td>
             <td>{{this.bookGenre}}</td>
-            <td>{{this.librariesLibraryID}}</td>
+            <td>{{this.libraryName}}</td>
         </tr>
         {{/each}}
     </tbody>
