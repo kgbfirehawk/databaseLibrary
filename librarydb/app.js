@@ -80,9 +80,22 @@ app.get('/', function(req, res)
         }) 
                                                                 // an object where 'data' is equal to the 'rows' we
     }); 
+
+//routes for 'Libraries'
+const librariesRoutes = require('./routes/librariesRoutes');  // Import libraries routes
+app.use('/', librariesRoutes);  // Use libraries routes
+
+//routes for 'Checkouts'
+const checkoutsRoutes = require('./routes/checkoutsRoutes');  // Import checkouts routes
+app.use('/', checkoutsRoutes);  // Use checkouts routes
+
+//routes for 'BooksBorrowers'
+const booksBorrowersRoutes = require('./routes/booksBorrowersRoutes');
+app.use('/', booksBorrowersRoutes);
+
  /*
     LISTENER
 */
 app.listen(PORT, function(){            // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
   console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
-});   
+});
