@@ -1,0 +1,76 @@
+<html>
+  <!-- Citation for the following function:
+Date: 11/06/2023
+Adapted from CS 340: Module 7- BSG Database (bsg_db.sql)
+Majority of the code was copied from the sample code given, and modified based on individual project tables. 
+Source URL: https://canvas.oregonstate.edu/courses/1976520/pages/exploration-database-application-design?module_item_id=24719062
+-->
+<head>
+<title>Books-Borrowers</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<h1>Books Borrowers</h1>
+
+[ <a href="index.html">Home</a> | <a href="libraries.html">Libraries</a> | <a href="staff.html">Staff</a> | <a href="books.html">Books</a> | <a href="borrowers.html">Borrowers</a> | <a href="checkouts.html">Checkouts</a>| <a href="booksBorrowers.html">BooksBorrowers</a>]
+<div id="browse" style="display: block">
+<p><strong>A page displaying the interscection table: Books-Borrowers</strong></p>
+
+<button type="button">Add New</button>
+
+<table border="1" cellpadding="5">
+  <tr>
+    <th>Books ID</th>
+    <th>Borrowers ID</th>
+  </tr>
+  <tr>
+    <td align="right" >1</td>
+    <td align="right" >1</td>
+    <td><a href="#">Delete</a></td>
+  </tr>
+  <tr>
+    <td align="right" >1</td>
+    <td align="right" >2</td>
+    <td><a href="#">Delete</a></td>
+  </tr>
+  <tr>
+    <td align="right" >2</td>
+    <td align="right" >3</td>
+    <td><a href="#">Delete</a></td>
+  </tr>
+  <tr>
+    <td align="right" >3</td>
+    <td align="right" >4</td>
+    <td><a href="#">Delete</a></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</div> <!-- browse -->
+<div id="insert" style="display: block">
+    <form id="addBooksBorrower">
+        <legend><strong>Add BooksBorrower</strong></legend>
+          <fieldset class="fields">
+            <label> Books-Book ID </label> <input type="text" name="booksBookID">
+            <label> Borrowers-User ID </label> <input type="text" name="borrowersUserID">
+          </fieldset>
+          <input class="btn" type="submit" id="addBooksBorrower" value="Add Books-Borrower">
+          <input class="btn" type="button" value="cancel">
+	</form> <!--add new booksBorrower-->
+</div><!-- insert -->
+<p>&nbsp;</p>
+<div id="delete" style="display: block">
+  <form id="deleteBooksBorrowers">
+      <legend><strong>Delete Books-Borrowers</strong></legend>
+          <fieldset class="fields">
+          <p>Are you sure you wish to delete the following?</p>
+          <label>Books ID:</label> 1
+            <label> Borrowers ID:</label> 1
+
+    </fieldset>
+    <input class="btn" type="submit" id="deleteBooksBorrowers" value="Delete Relationship">
+          <input class="btn" type="button" value="cancel" >
+  </form> 
+</div><!-- delete -->
+</body>
+</html>
