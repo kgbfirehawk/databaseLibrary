@@ -17,13 +17,6 @@ This project is a **Library Management System** that allows librarians to manage
    - [Access the Application](#step-6-access-the-application)  
 3. [Project Files](#project-files)
 
----
-
-## Project Structure
-.gitignore BaseSQL/ ├── DDL.sql # Create tables (Data Definition Language) ├── DML.sql # Insert initial data (Data Manipulation Language) └── introDatabase.sql # Additional schema setup HTML/ ├── books.html ├── booksBorrowers.html ├── borrowers.html ├── checkouts.html ├── index.html ├── libraries.html └── staff.html librarydb/ ├── .env # Environment variables ├── app.js # Main application server ├── database/ │ └── db-connector.js # MySQL connection handler ├── routes/ │ ├── booksRoutes.js │ ├── booksBorrowersRoutes.js │ ├── borrowersRoutes.js │ ├── checkoutsRoutes.js │ ├── librariesRoutes.js │ └── staffRoutes.js ├── views/ │ ├── books.hbs │ ├── booksBorrowers.hbs │ ├── borrowers.hbs │ ├── checkouts.hbs │ ├── index.hbs │ ├── libraries.hbs │ └── staff.hbs ├── layouts/ │ └── main.hbs # Main layout template └── package.json # Project dependencies public/ ├── styles.css # Static CSS README.md
-
----
-
 ## Setup Instructions
 
 ### Prerequisites
@@ -42,70 +35,75 @@ Clone the repository and navigate to the project folder:
 ```bash
 git clone <repository-url>
 cd databaseLibProject
+```
 
 
-
-## Step 2: Install Dependencies
+### Step 2: Install Dependencies
 
 Navigate to the `librarydb` directory and install the required Node.js dependencies:
 
 ```bash
 cd librarydb
 npm install
+```
 
 ### Step 3: Set Up the Database
-
 Ensure your MySQL server is running.  
 Create the necessary database and tables by executing the SQL scripts located in the `BaseSQL` and `database` directories. You can use a MySQL client or the command line to run these scripts:
-
 ```bash
 mysql -u <username> -p <database_name> < BaseSQL/DDL.sql
 mysql -u <username> -p <database_name> < BaseSQL/DML.sql
+```
 
-Step 4: Configure the Database Connector
+### Step 4: Configure the Database Connector
 Create a .env file in the librarydb directory with your database connection details:
+```
 DB_CONNECTION_LIMIT=10
 DB_HOST=your-database-host
 DB_USER=your-database-username
 DB_PASSWORD=your-database-password
 DB_DATABASE=your-database-name
+```
 
-Step 5: Start the Server
+### Step 5: Start the Server
 Start the Express server by running the following command in the librarydb directory:
+```
 node app.js
+```
 
-Step 6: Access the Application
+### Step 6: Access the Application
 Open your web browser and navigate to http://localhost:8728 to access the application.
 
-Project Files
+### Project Files
+```
 BaseSQL/: Contains SQL scripts for setting up the database schema and initial data.
-DDL.sql: Data Definition Language script to create tables.
-DML.sql: Data Manipulation Language script to insert initial data.
-introDatabase.sql: Another script for setting up the database schema.
+   DDL.sql: Data Definition Language script to create tables.
+   DML.sql: Data Manipulation Language script to insert initial data.
+   introDatabase.sql: Another script for setting up the database schema.
 HTML/: Contains static HTML files for the application.
 librarydb/: Main directory for the Node.js application.
 .env: Environment variables for database connection.
 app.js: Main application file to set up and start the Express server.
-database/: Contains database-related files.
-db-connector.js: Database connector file to manage MySQL connections.
-DDL.sql: SQL script for creating tables.
-package.json: Lists the project dependencies.
-public/: Contains public static files like HTML and CSS.
-routes/: Contains route handlers for different parts of the application.
-booksBorrowersRoutes.js: Routes for managing book-borrower relationships.
-booksRoutes.js: Routes for managing books.
-borrowersRoutes.js: Routes for managing borrowers.
-checkoutsRoutes.js: Routes for managing checkouts.
-librariesRoutes.js: Routes for managing libraries.
-staffRoutes.js: Routes for managing staff.
-views/: Contains Handlebars templates for rendering HTML.
-books.hbs: Template for displaying books.
-booksBorrowers.hbs: Template for displaying book-borrower relationships.
-borrowers.hbs: Template for displaying borrowers.
-checkouts.hbs: Template for displaying checkouts.
-index.hbs: Template for the home page.
-layouts/: Contains the main layout template.
-main.hbs: Main layout template.
-libraries.hbs: Template for displaying libraries.
-staff.hbs: Template for displaying staff.
+   database/: Contains database-related files.
+      db-connector.js: Database connector file to manage MySQL connections.
+   routes/: Contains route handlers for different parts of the application.
+      booksRoutes.js: Routes for managing books.
+      booksBorrowersRoutes.js: Routes for managing book-borrower relationships.
+      borrowersRoutes.js: Routes for managing borrowers.
+      checkoutsRoutes.js: Routes for managing checkouts.
+      librariesRoutes.js: Routes for managing libraries.
+      staffRoutes.js: Routes for managing staff.
+   views/: Contains Handlebars templates for rendering HTML.
+      books.hbs: Template for displaying books.
+      booksBorrowers.hbs: Template for displaying book-borrower relationships.
+      borrowers.hbs: Template for displaying borrowers.
+      checkouts.hbs: Template for displaying checkouts.
+      index.hbs: Template for the home page.
+      libraries.hbs: Template for displaying libraries.
+      staff.hbs: Template for displaying staff.
+      layouts/: Contains the main layout template.
+         main.hbs: Main layout template.
+   public/: Contains public static files like HTML and CSS.
+      styles.css: Static CSS.
+```
 ---
