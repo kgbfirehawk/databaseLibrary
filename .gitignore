@@ -6,3 +6,5 @@ librarydb/database/db-connector.js
 
 # Ignore environment files
 .env
+
+test.py 
